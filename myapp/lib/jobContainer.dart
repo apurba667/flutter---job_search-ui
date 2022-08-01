@@ -26,7 +26,6 @@ class _JobContainerState extends State<JobContainer> {
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (context) => JobDetails(
-                        userModel: myList[index],
                         model: myList[index],
                       )),
               child: Padding(

@@ -2,18 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:myapp/model/usermodel.dart';
 
-class JobDetails extends StatefulWidget {
-  JobDetails({Key? key, this.model, required this.userModel}) : super(key: key);
-  UserModel userModel;
-  final UserModel? model;
+class JobDetails extends StatelessWidget {
+  JobDetails({Key? key, this.model}) : super(key: key);
+  final model;
 
-  @override
-  State<JobDetails> createState() => _JobDetailsState();
-}
-
-class _JobDetailsState extends State<JobDetails> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,19 +20,30 @@ class _JobDetailsState extends State<JobDetails> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: 3,
+                width: 60,
+                color: Colors.teal,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
                     Image.asset(
-                      "${widget.model!.logoUrl}",
+                      "${model!.logoUrl}",
                       height: 40,
                     ),
                     SizedBox(
                       width: 10,
                     ),
-                    Text("${widget.model!.company}")
+                    Text("${model!.company}")
                   ],
                 ),
                 Row(
@@ -56,7 +60,7 @@ class _JobDetailsState extends State<JobDetails> {
             SizedBox(
               height: 20,
             ),
-            Text("${widget.model!.title}"),
+            Text("${model!.title}"),
             SizedBox(
               height: 20,
             ),
@@ -69,7 +73,7 @@ class _JobDetailsState extends State<JobDetails> {
                       Icons.pin_drop_outlined,
                       color: Colors.yellow,
                     ),
-                    Text("${widget.model!.location}")
+                    Text("${model!.location}")
                   ],
                 ),
                 Row(
@@ -78,7 +82,7 @@ class _JobDetailsState extends State<JobDetails> {
                       Icons.timer,
                       color: Colors.yellow,
                     ),
-                    Text("${widget.model!.time}")
+                    Text("${model!.time}")
                   ],
                 )
               ],
@@ -87,6 +91,32 @@ class _JobDetailsState extends State<JobDetails> {
               height: 20,
             ),
             Text("Requirments:"),
+            SizedBox(
+              height: 20,
+            ),
+            ...model.reg
+                .map((e) => Container(
+                      child: Row(children: [
+                        Container(
+                          margin: EdgeInsets.all(5),
+                          height: 8,
+                          width: 8,
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(30)),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: 300,
+                          ),
+                          child: Text(e),
+                        )
+                      ]),
+                    ))
+                .toList()
           ],
         ),
       ),
