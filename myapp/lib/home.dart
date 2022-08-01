@@ -5,6 +5,7 @@ import 'package:myapp/appBarPart.dart';
 
 import 'package:myapp/buttonPart.dart';
 import 'package:myapp/containerPart.dart';
+import 'package:myapp/jobContainer.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,15 +30,21 @@ class _HomeState extends State<Home> {
                   )),
             ],
           ),
-          Column(
-            children: [
-              SizedBox(
-                height: 80,
-              ),
-              AppBarF(),
-              ContainerPart(),
-              ButtonPart()
-            ],
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 80,
+                ),
+                AppBarF(),
+                ContainerPart(),
+                ButtonPart(),
+                SizedBox(
+                  height: 20,
+                ),
+                JobContainer()
+              ],
+            ),
           )
         ],
       ),
